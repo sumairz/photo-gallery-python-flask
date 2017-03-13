@@ -1,0 +1,72 @@
+{% extends '_layout.html' %}
+{% block body %}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <h1 class="page-header">Photos</h1>
+    </div>
+
+   {% if not session.logged_in %}
+    <form action="/galleries/album/{{gallery_name}}/upload" method="post" enctype="multipart/form-data">
+    <div><strong>Only Jpeg allowed</strong></div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="file" name="file" class="form-control" placeholder="Upload photo" accept="image/jpeg">
+                <input type="hidden" name="galleryName" value="{{gallery_name}}">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Upload</button>
+                </span>
+                </div><!-- /input-group -->
+
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    </form>
+    {% endif %}
+    <hr >
+
+     {% if photos is defined %}
+     {% for photo in photos %}
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <!--<?php-->
+                <!--if($_SESSION['type'] == "admin") {-->
+                <!--?>-->
+                <!-- Dropdown action -->
+                    {% if session['type'] == 'admin' %}
+                <div class="btn-group">
+                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)" data-galleryname="{{gallery_name}}" data-photoname="{{photo}}" id="deletePhotobtn">Delete Photo</a></li>
+                    </ul>
+                </div> <!-- End Dropdown action -->
+                    {% endif %}
+                <!--<?php } ?>-->
+                <a class="thumbnail" href="javascript:void(0)" id="popImage" data-imgsrc="/{{gallery_folder}}{{gallery_name}}/{{photo}}">
+                    <img class="img-responsive" src="/{{gallery_folder}}{{gallery_name}}/{{photo}}" alt="">
+                </a>
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="col-lg-3"><p class="alert alert-info">No Photos Found</p></div>
+        {% endif %}
+
+</div> <!-- End row -->
+
+
+
+<div id="imagemodal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <img src="" id="imagepreview" class="img-responsive" >
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
