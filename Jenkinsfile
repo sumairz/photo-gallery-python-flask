@@ -36,7 +36,7 @@ pipeline {
             steps {
                 dir(path: env.BUILD_ID) {
                     sh "pip install flask"
-                    sh "export FLASK_APP='main'"
+                    sh "export FLASK_APP=main"
                     sh "python3 -m flask run"
                 }
             }
