@@ -4,11 +4,11 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'python:2-alpine'
+                    image 'python'
                 }
             }
             steps {
-                sh 'python - py_compile main.py definition.py modules/Gallery.py modules/Login.py modules/Photos.py'
+                sh 'python -m py_compile main.py definition.py modules/Gallery.py modules/Login.py modules/Photos.py'
                 stash(name: 'compiled-results', includes: '*.py*,modules/*.py*') 
             }
         }
@@ -16,7 +16,7 @@ pipeline {
             agent any
             environment {
                 VOLUME = '$(pwd):/src'
-                IMAGE = 'cdrx/pyinstaller-linux:python2'
+                IMAGE = 'cdrx/pyinstaller-linux'
             }
             steps {
                 dir(path: env.BUILD_ID) {
