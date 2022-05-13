@@ -9,7 +9,7 @@ pipeline {
             }
             steps {
                 sh 'python - py_compile main.py definition.py modules/Gallery.py modules/Login.py modules/Photos.py'
-                stash(name: 'compiled-results', includes: '*.py*', 'modules/*.py*') 
+                stash(name: 'compiled-results', includes: '*.py*,modules/*.py*') 
             }
         }
     }
