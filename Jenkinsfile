@@ -35,7 +35,6 @@ pipeline {
             agent any
             steps {
                 dir(path: env.BUILD_ID) {
-                    sh "apt install pyton3-pip"
                     sh "pip install flask"
                     sh "export FLASK_APP='main'"
                     sh "python3 -m flask run"
