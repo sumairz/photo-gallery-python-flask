@@ -35,9 +35,9 @@ pipeline {
             agent any
             steps {
                 //sh "pip install flask"
-                sh '$(pwd)'
-                export FLASK_APP='main'
-                python -m flask run
+                sh "$(pwd)"
+                sh "export FLASK_APP='main'"
+                sh "python -m flask run"
             }
         }
     }
