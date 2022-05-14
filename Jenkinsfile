@@ -44,8 +44,10 @@ pipeline {
         //     }
         // }
         stage('Build image') {
-            app = docker.build("gallery:${env.BUILD_NUMBER}")
-
+            agent any
+            steps{
+                app = docker.build("gallery:${env.BUILD_NUMBER}")
+            }
         }
     }
 }
