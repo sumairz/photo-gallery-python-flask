@@ -46,7 +46,7 @@ pipeline {
         stage('Build image') {
             agent any
             steps{
-                app = docker.build("gallery:${env.BUILD_NUMBER}")
+                sh "docker build ."
             }
         }
     }
