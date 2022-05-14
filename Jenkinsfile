@@ -59,6 +59,7 @@ pipeline {
         stage('Deploy') {
             agent any
             steps {
+                sh "docker rm testsite"
                 sh "docker run -p 50000:5000 --name testsite -d testsite:latest"
             }
         }
