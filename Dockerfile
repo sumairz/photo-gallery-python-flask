@@ -6,6 +6,8 @@ COPY data /site/
 COPY modules /site/
 COPY static /site/
 COPY templates /site/
-ENV FLASK_APP='main'
+COPY start.sh /
+#ENV FLASK_APP='main'
 EXPOSE 5000
-ENTRYPOINT ["python", "-m", "flask", "run"]
+CMD ["/start.sh"]
+#ENTRYPOINT ["python", "-m", "flask", "run"]
