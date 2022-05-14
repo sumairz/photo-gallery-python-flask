@@ -44,20 +44,20 @@ pipeline {
         //     }
         // }
         stage('Build image') {
-            // agent any
+            agent any
             steps {
                 sh "docker build -t testsite:latest -t testsite:${env.BUILD_NUMBER} ."
             }
         }
         stage('Test') {
-            // agent any
+            agent any
             steps {
                 sh "echo Tests are ok!"
             }
 
         }
         stage('Deploy') {
-            // agent any
+            agent any
             steps {
                 sh "docker run -p 50000:5000 --name testsite -d testsite:latest"
             }
