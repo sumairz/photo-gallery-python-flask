@@ -1,5 +1,5 @@
-FROM python:2-alpine
-RUN apk add --update py-pip
+FROM python:3-alpine
+RUN apk add --update py3-pip
 RUN pip install flask
 COPY *.py /site/ 
 COPY data /site/data/
