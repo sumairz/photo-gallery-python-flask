@@ -48,7 +48,7 @@ pipeline {
         stage('Build image') {
             agent any
             steps {
-                sh "docker build -t ${ImangeName}:latest -t ${ImangeName}:${env.BUILD_NUMBER} ."
+                sh "docker build -t ${ImageName}:latest -t ${ImageName}:${env.BUILD_NUMBER} ."
             }
         }
         stage('Test') {
@@ -56,14 +56,13 @@ pipeline {
             steps {
                 sh "echo Tests are ok!"
             }
-
         }
         stage('Deploy') {
             agent any
             steps {
-                sh "docker stop ${ImangeName}"
-                sh "docker rm ${ImangeName}"
-                sh "docker run -p 50000:5000 --name ${ImangeName} -d ${ImangeName}:latest"
+                sh "docker stop ${ImageName}"
+                sh "docker rm ${ImageName}"
+                sh "docker run -p 50000:5000 --name ${ImageName} -d ${ImageName}:latest"
             }
         }
     }
