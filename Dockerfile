@@ -1,5 +1,5 @@
 FROM python:2-alpine
-RUN apk add python-pip
+RUN apk add --update py-pip
 RUN pip install flask
 COPY *.py /site
 COPY data /site
