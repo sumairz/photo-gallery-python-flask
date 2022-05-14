@@ -44,7 +44,7 @@ pipeline {
         //     }
         // }
         stage('Build image') {
-            docker.build("gallery:${env.BUILD_NUMBER}")
+            app = docker.build("gallery:${env.BUILD_NUMBER}")
 
         }
     }
