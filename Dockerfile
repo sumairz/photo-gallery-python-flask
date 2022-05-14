@@ -7,6 +7,7 @@ COPY modules /site/
 COPY static /site/
 COPY templates /site/
 COPY start.sh /
+RUN chmod +x /start.sh
 #ENV FLASK_APP='main'
 EXPOSE 5000
 CMD ["/start.sh"]
