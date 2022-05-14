@@ -1,3 +1,5 @@
+def ImageName = "testsite"
+
 pipeline {
     agent none
     stages {
@@ -46,7 +48,7 @@ pipeline {
         stage('Build image') {
             agent any
             steps {
-                sh "docker build -t testsite:latest -t testsite:${env.BUILD_NUMBER} ."
+                sh "docker build -t ${ImangeName}:latest -t ${ImangeName}:${env.BUILD_NUMBER} ."
             }
         }
         stage('Test') {
@@ -59,8 +61,9 @@ pipeline {
         stage('Deploy') {
             agent any
             steps {
-                sh "docker rm testsite"
-                sh "docker run -p 50000:5000 --name testsite -d testsite:latest"
+                sh "docker stop ${ImangeName}"
+                sh "docker rm ${ImangeName}"
+                sh "docker run -p 50000:5000 --name ${ImangeName} -d ${ImangeName}:latest"
             }
         }
     }
