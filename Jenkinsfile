@@ -31,17 +31,21 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Deploy'){
-            agent any
-            environment {
-                FLASK_APP = 'main'
-            }
-            steps {
-                dir(path: env.BUILD_ID) {
-                    sh "pip install flask"
-                    sh "cd ..; export FLASK_APP=${FLASK_APP}; python3 -m flask run"
-                }
-            }
+        // stage('Deploy'){
+        //     agent any
+        //     environment {
+        //         FLASK_APP = 'main'
+        //     }
+        //     steps {
+        //         dir(path: env.BUILD_ID) {
+        //             sh "pip install flask"
+        //             sh "cd ..; export FLASK_APP=${FLASK_APP}; python3 -m flask run"
+        //         }
+        //     }
+        // }
+        stage('Build image') {
+            docker.build("gallery:${env.BUILD_NUMBER}")
+
         }
     }
 }
