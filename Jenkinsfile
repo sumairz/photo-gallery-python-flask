@@ -46,7 +46,7 @@ pipeline {
         stage('Build image') {
             agent any
             steps{
-                sh "docker build ."
+                sh "docker build -t testsite:${env.BUILD_NUMBER} ."
             }
         }
     }
