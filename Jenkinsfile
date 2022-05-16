@@ -67,6 +67,7 @@ pipeline {
             }
             post {
                 success {
+                    echo "App deployed at http://192.168.25.38:${PublishedPort}"
                 }
             }
         }
