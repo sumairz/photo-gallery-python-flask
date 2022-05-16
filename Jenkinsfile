@@ -1,4 +1,5 @@
 def ImageName = "testsite"
+def PublishedPort = "50000"
 
 pipeline {
     agent none
@@ -62,7 +63,11 @@ pipeline {
             steps {
                 sh "docker stop ${ImageName}"
                 sh "docker rm ${ImageName}"
-                sh "docker run -p 50000:5000 --name ${ImageName} -d ${ImageName}:latest"
+                sh "docker run -p ${PublishedPort}:5000 --name ${ImageName} -d ${ImageName}:latest"
+            }
+            post {
+                success {
+                }
             }
         }
     }
