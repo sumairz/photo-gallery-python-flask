@@ -20,9 +20,11 @@ pipeline {
             // agent any
             steps {
                 sh """
-                if [ $(docker ps -a -f name=${ImageName} -q | wc -l) -gt 0 ]; then
+                '''
+                if [ \$(docker ps -a -f name=${ImageName} -q | wc -l) -gt 0 ]; then
                     docker stop ${ImageName}
                 fi
+                '''
                 """
                 // sh "docker rm ${ImageName}"
                 sh "docker run --rm -p ${PublishedPort}:5000 --name ${ImageName} -d ${ImageName}:${env.BUILD_ID}"
