@@ -20,7 +20,7 @@ pipeline {
             // agent any
             steps {
                 sh '''#!/bin/bash
-                if [ \$(docker ps -a -f name=${ImageName} -q | wc -l) -gt 0 ]; then
+                if [ $(docker ps -a -f name=${ImageName} -q | wc -l) -gt 0 ]; then
                     docker stop ${ImageName}
                 fi
                 '''
@@ -30,8 +30,8 @@ pipeline {
             post {
                 success {
                         sh '''#!/bin/bash
-                        ip4=\$(/sbin/ip -o -4 addr list eth0 | awk '{print \$4}' | cut -d/ -f1)
-                        echo "App deployed at http://\$ip4:${PublishedPort}"
+                        ip4=$(/sbin/ip -o -4 addr list eth0 | awk '{print \$4}' | cut -d/ -f1)
+                        echo "App deployed at http://$ip4:${PublishedPort}"
                         '''
                     }
                 }
