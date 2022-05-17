@@ -25,7 +25,9 @@ pipeline {
             }
             post {
                 success {
-                    sh 'App deployed at http://$(hostname -I | cut -d' ' -f1):${PublishedPort}'
+                    steps {
+                        sh 'App deployed at http://$(hostname -I | cut -d' ' -f1):${PublishedPort}'
+                    }
                 }
             }
         }
