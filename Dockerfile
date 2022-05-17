@@ -1,6 +1,7 @@
 FROM python:3-alpine
 RUN apk add --update py3-pip
-COPY * /site/
+COPY . /site/
+RUN ls -la /site/
 # COPY requrements.txt, *.py, data, modules, static, templates /site/ 
 RUN pip install -r requirements.txt
 # COPY data /site/data/
