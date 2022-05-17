@@ -15,12 +15,6 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 session = {}
 
-'''
-for int routes
-@app.route('/<int:id>')
-def func(id):
-    print(id)
-'''
 photos_obj = Photos()
 
 
