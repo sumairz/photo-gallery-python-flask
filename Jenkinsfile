@@ -5,9 +5,9 @@ pipeline {
     agent any
     stages {
         stage('Build image') {
-            agent any
+            // agent any
             steps {
-                sh "docker build -t ${ImageName}:latest -t ${ImageName}:${env.BUILD_NUMBER} ."
+                sh "docker build -t ${ImageName}:${env.BUILD_ID} ."
             }
         }
         stage('Test') {
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 // sh "docker stop ${ImageName}"
                 // sh "docker rm ${ImageName}"
-                sh "docker run --rm -p ${PublishedPort}:5000 --name ${ImageName} -d ${ImageName}:latest"
+                sh "docker run --rm -p ${PublishedPort}:5000 --name ${ImageName} -d ${ImageName}:${env.BUILD_ID}"
                 sh "ip4=`/sbin/ip -o -4 addr list eth0 | awk '{print \$4}' | cut -d/ -f1`"
             }
             post {
