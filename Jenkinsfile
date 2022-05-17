@@ -22,11 +22,11 @@ pipeline {
                 // sh "docker stop ${ImageName}"
                 // sh "docker rm ${ImageName}"
                 sh "docker run -rm -p ${PublishedPort}:5000 --name ${ImageName} -d ${ImageName}:latest"
+                sh "ip4=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)"
             }
             post {
                 success {
-                    steps {
-                        sh 'App deployed at http://$(hostname -I | cut -d' ' -f1):${PublishedPort}'
+                        echo "App deployed at http://$ip4:${PublishedPort}"
                     }
                 }
             }
